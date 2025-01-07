@@ -105,7 +105,7 @@ if fl is not None:
 else:
     # Use default data when no file is uploaded
     st.subheader("Preview of Default Data")
-    os.chdir(r"C:\Users\HP\Desktop\Trend Forge\dashboard")
+    os.chdir(r"C:\Users\HP\Desktop\DASHBOARD\DASHBOARD")
     df = pd.read_csv("output.csv", encoding="ISO-8859-1")
     st.dataframe(df.head(5))
 
