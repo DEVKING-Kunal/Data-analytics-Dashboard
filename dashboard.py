@@ -4,6 +4,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import os
 import warnings
+import sys
+import path
 warnings.filterwarnings("ignore")
 
 # Streamlit Configuration
@@ -90,6 +92,8 @@ expected_columns = [
     "Is_Link", "Is_Photo", "Is_Status", "Is_Video", "Is_Carousel", "Is_Reel"
 ]
 
+
+
 # File handling
 if fl is not None:
     filename = fl.name
@@ -105,7 +109,7 @@ if fl is not None:
 else:
     # Use default data when no file is uploaded
     st.subheader("Preview of Default Data")
-    os.chdir(r"C:\Users\HP\Desktop\DASHBOARD\DASHBOARD")
+    file_path = os.path.join(os.path.dirname(__file__), "output.csv")#C:\Users\HP\Desktop\DASHBOARD\DASHBOARD\output.csv
     df = pd.read_csv("output.csv", encoding="ISO-8859-1")
     st.dataframe(df.head(5))
 
