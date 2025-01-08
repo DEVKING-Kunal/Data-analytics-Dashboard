@@ -11,6 +11,8 @@ warnings.filterwarnings("ignore")
 # Streamlit Configuration
 st.set_page_config(page_title="Dashboard", page_icon=":bar_chart:", layout="wide")
 
+
+
 # Custom CSS for KPIs and UI
 st.markdown("""
     <style>
@@ -79,6 +81,8 @@ st.markdown("""
 
 
 
+
+
 # File Uploader
 fl = st.file_uploader(":file_folder: Upload a file", type=(["csv", "xlsx"]))
 
@@ -116,6 +120,53 @@ else:
 
 # Date Conversion
 df["Posting_Date"] = pd.to_datetime(df["Posting_Date"], errors="coerce").dt.date
+
+
+
+#Add styles for the sidebar button
+st.markdown(
+    """
+    <style>
+        .stButton > button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(to orange 15%,red 50%,violet);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.7);
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .stButton > button:hover {
+            background: linear-gradient(to right,orange ,red 40%,purple);
+            box-shadow: 0 0 20px rgba(255, 69, 0, 1), 0 0 20px rgba(255, 215, 0, 1), 0 0 20px rgba(255, 0, 0, 0.8);
+            color: white;
+        }
+
+        .stButton > button img {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Sidebar: Back to Homepage Button
+with st.sidebar:
+    if st.button("🏠 Back to Homepage", key="homepage_button"):
+        st.write('<meta http-equiv="refresh" content="0; url=https://devking-kunal.github.io/Trend-Forge/" />', unsafe_allow_html=True)
 
 # Sidebar Filters
 st.sidebar.header("Filters")
@@ -333,10 +384,24 @@ st.subheader("Export Data")
 csv = df.to_csv(index=False).encode("utf-8")
 st.download_button("Download Filtered Data as CSV", data=csv, file_name="filtered_data.csv", mime="text/csv")
 
-
 st.markdown("""
-    <div style="position: fixed; bottom: 0; width: 100%; text-align: left; padding: 0px; font-size: 17px; font-weight: bold; background-color: black; color: white; text-shadow: 0 0 0px gold, 0 0 0px gold, 0 0 2px gold; z-index: 999;">
-        © 2025 Made with chai, code, and a pinch of magic by Kunal Kashyap. All rights reserved.
+    <div style="
+        position: fixed; 
+        bottom: 0; 
+        width: 100%; 
+        text-align: left; 
+        padding: 2px 0; 
+        font-size: 20px; 
+        font-weight: bold; 
+        background: rgba(0, 0, 0, 0.5); 
+        color: white; 
+        text-shadow: 0 0 5px rgba(255, 69, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.7); 
+        z-index: 999;
+        backdrop-filter: blur(10px);
+        border-top: 2px solid rgba(255, 215, 0, 0.7);
+        background: none;
+    ">
+        © 2025 Trend-Forge. All rights reserved.  
     </div>
 """, unsafe_allow_html=True)
 
